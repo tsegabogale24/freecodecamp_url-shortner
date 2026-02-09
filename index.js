@@ -26,7 +26,7 @@ app.post('/api/shorturl', (req, res) => {
 
   // Add protocol if missing
   if (!/^https?:\/\//i.test(original_url)) {
-    original_url = 'http://' + original_url;
+    original_url = 'http://www.' + original_url;
   }
 
   // Validate URL
