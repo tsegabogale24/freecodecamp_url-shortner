@@ -106,8 +106,8 @@ app.post('/api/shorturl', async (req, res) => {
 });
 
 // GET endpoint to redirect
-app.get('/api/shorturl/:shorturl', async (req, res) => {
-  const shorturl = parseInt(req.params.shorturl);
+app.get('/api/shorturl/:short_url', async (req, res) => {
+  const shorturl = parseInt(req.params.short_url);
   if (isNaN(shorturl)) return res.json({ error: 'Wrong format' });
 
   const record = await Url.findOne({ short_url: shorturl });
