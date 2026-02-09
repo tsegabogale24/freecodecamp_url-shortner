@@ -36,16 +36,17 @@ app.post('/api/shorturl' , (req , res) => {
     }
   })
 })
-app.get('/api/shorturl/:shorturl' , (req , res) => {
+app.get('/api/shorturl/:shorturl', (req, res) => {
   const shorturl = req.params.shorturl;
-  const url = urldatabase.find(url => url.short_url == shorturl);
-  if(url){
-    res.redirect(url.original_url);
+  const url = urldatabase.find(u => u.short_url == shorturl);
+
+  if (url) {
+    return res.redirect(url.original_url);
+  } else {
+    return res.json({ error: "short url not found" });
   }
-  else{
-    res.json({error: "short url not found"});
-  }
-})
+});
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
