@@ -7,11 +7,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}, () => console.log('Connected to MongoDB'));
-
+mongoose.connect(process.env.MONGO_URL).then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('MongoDB connection error:', err));
 // Define URL schema and model
 const urlSchema = new mongoose.Schema({
   original_url: String,
