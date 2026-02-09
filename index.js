@@ -113,7 +113,7 @@ app.get('/api/shorturl/:shorturl', async (req, res) => {
   const record = await Url.findOne({ short_url: shorturl });
   if (!record) return res.json({ error: 'No short URL found for the given input' });
 
-  res.redirect(record.original_url);
+  res.redirect(301 , record.original_url);
 });
 
 // Start server
