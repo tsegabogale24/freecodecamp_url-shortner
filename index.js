@@ -36,7 +36,7 @@ app.post('/api/shorturl' , (req , res) => {
     }
   })
 })
-app.get('/api/:shorturl' , (req , res) => {
+app.get('/api/shorturl/:shorturl' , (req , res) => {
   shorturl = req.params.shorturl;
   url = urldatabase.find(url => url.short_url == shorturl);
   if(url){
