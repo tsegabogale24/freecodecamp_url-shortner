@@ -119,7 +119,7 @@ app.get('/api/shorturl/:short_url', async (req, res) => {
     return res.json({ error: 'No short URL found for the given input' });
   }
 
-  res.redirect(record.original_url);   // 301 is default
+  res.redirect(301, record.original_url);   // 301 is default
 });
 
 // Start server
