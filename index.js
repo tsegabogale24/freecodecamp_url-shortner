@@ -107,13 +107,19 @@ app.post('/api/shorturl', async (req, res) => {
 
 // GET endpoint to redirect
 app.get('/api/shorturl/:short_url', async (req, res) => {
-  const shorturl = parseInt(req.params.short_url);
-  if (isNaN(shorturl)) return res.json({ error: 'Wrong format' });
+  const shortStr = req.params.short_url.trim();           // remove any weird whitespace
+  const shortNum = parseInt(shortStr, 10);
 
-  const record = await Url.findOne({ short_url: shorturl });
-  if (!record) return res.json({ error: 'No short URL found for the given input' });
+  if (isNaN(shortNum) || shortNum <= 0) {
+    return res.json({ error: 'Wrong format' });
+  }
 
-  res.redirect(301 , record.original_url);
+  const record = await Url.findOne({ short_url: shortNum });
+  if (!record) {
+    return res.json({ error: 'No short URL found for the given input' });
+  }
+
+  res.redirect(record.original_url);   // 301 is default
 });
 
 // Start server
